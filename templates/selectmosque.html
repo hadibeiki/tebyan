@@ -1,0 +1,8 @@
+<div style="margin-right: 35%" id="mosquehadi">
+    <select class="select custom-select mosqueselect" required id="mosqueselect" name="mosque" hx-get="{% url 'detailMosque'  %}" hx-trigger="change" hx-target="#mosquedata">
+        <option value="" selected="">---------</option>
+        {% for item in mosques %}
+            <option name="mosque" value="{{ item.id }}">{{ item.name }}</option>
+        {% endfor %}
+    </select>
+</div>

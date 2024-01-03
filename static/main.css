@@ -1,0 +1,432 @@
+body{
+    height: 97vh;
+}
+
+
+
+.background{
+    width: 100%;
+    height: 100%;
+    background-image: url("img/5.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    position: relative;
+    z-index: 0;
+}
+.squar{
+    width: 30%;
+    height: 40vh;
+    padding: 20px;
+    /*background-color: rgb(128,0,128);*/
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    border: 3px solid #f1f1f1;
+    top: 30%;
+    left: 33%;
+    z-index: 2;
+    border-radius: 10px;
+}
+
+.headerTxt{
+    font-family: "B Titr", serif ;
+    font-size: 20px;
+    direction: rtl;
+    color: #f1f1f1;
+    right: 100%;
+}
+.mobile{
+    width: 90%;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 1%;
+    margin-top: 5%;
+    border-radius: 8px 8px 8px 8px;
+}
+.verify{
+    width: 80%;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 1%;
+    margin-top: 5%;
+    border-radius: 8px 0px 0px 8px;
+}
+.logo{
+    position: absolute;
+    margin-top: -45%;
+    margin-left: 65%;
+    justify-content: center;
+    text-align: center;
+}
+.logo img{
+    width: 100%;
+    height: 50vh;
+}
+.logo h3{
+    margin-top: -20%;
+    font-family: "B Titr", sans-serif;
+}
+.poem{
+    margin-left: 33%;
+    margin-top: -3%;
+    position: absolute;
+    font-family: "B Titr",'sans-serif';
+    color: white;
+    font-size: 20px;
+
+}
+.melicode{
+    width: 100%;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 1%;
+    margin-top: 15%;
+    border-radius: 8px 0px 0px 8px;
+}
+.btnok{
+    margin-top: 15%;
+    font-family: "B Mitra", serif;
+    width: 15%;
+    height: 15%;
+    font-size: 22px;
+    margin-left: -1%;
+    background-color: rgb(11,152,35);
+    border-color: transparent;
+    border-radius: 0px 5px 5px 0px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.btnok:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 5%;
+    padding-left: 16%;
+    margin-left: -10px!important;
+    margin-top: -5%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btnok:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.squarsign{
+    width: 80%;
+    height: 85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    padding: 20px;
+    /*background-color: rgb(128,0,128);*/
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    border: 3px solid #f1f1f1;
+    top: 8%;
+    left: 8.5%;
+    z-index: 2;
+    border-radius: 10px;
+}
+.signupform{
+    direction: rtl;
+    padding: 10px;
+    margin-right: 10%;
+}
+
+.form-group label{
+    color: #f1f1f1;
+    font-family: "B Mitra", serif;
+    font-size: 20px;
+}
+
+
+.signupform label{
+    color: #f1f1f1;
+    font-family: "B Mitra", serif;
+    font-size: 20px;
+}
+.mosqueform label{
+    color: black;
+    font-family: "B Mitra", serif;
+    font-size: 20px;
+    display: inline-block;
+    text-align: right;
+}
+.btn-s{
+    width: 100px;
+}
+
+
+.title{
+    font-family: "B Titr", serif;
+    white-space: nowrap;
+    font-size: 24px;
+    text-align: end;
+    color: #f1f1f1;
+}
+option[value="3"]{
+    display:none;
+}
+.explain{
+    font-family: "B Titr", serif;
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: end;
+    margin-top: 2%;
+    color: #f1f1f1;
+}
+.hadi{
+    width: 300px;
+}
+.programe{
+    font-size: 16px;
+    font-family: "B Nazanin",'serif';
+    font-weight: bold;
+    resize: none;
+    direction: rtl;
+    margin-left: 4%;
+    margin-top: 2%;
+    width: 50%;
+    height: 250px;
+    border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: mediumspringgreen;
+    width: 5%;
+    border-radius: 10px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+.changerow{
+    margin-right: 20%;
+}
+.swiper-slide{
+    width: 250px;
+    height: 250px;
+}
+.swiper-container{
+    width: 100%;
+    height: 250px;
+    margin-top: 5%;
+}
+.swiper-slide img{
+    width: 250px;
+    height: 250px;
+    border-radius: 15px;
+}
+.phone{
+    font-family: "B Titr", serif;
+    white-space: nowrap;
+    font-size: 24px;
+    text-align: end;
+    color: #f1f1f1;
+}
+.txtbackground{
+    border-radius: 10px;
+    width: 100%;
+    height: 250px;
+    background-color: rgba(0,0,0,0.5);
+    margin-top: 2%;
+}
+.title2{
+    font-family: "B Titr", serif;
+    font-size: 24px;
+    margin-top: auto;
+    margin-left:88%;
+    color: #f1f1f1;
+}
+
+.title3{
+    font-family: "B Titr", serif;
+    font-size: 24px;
+    margin-top: auto;
+    font-weight: bold;
+    color: #000;
+    margin-left: 100%;
+}
+
+
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    right: 0%;
+}
+
+#toggle {
+    -webkit-appearance: none;
+}
+
+.button {
+    position: absolute;
+    z-index: 999;
+    width: 43px;
+    height: 43px;
+    background: mediumvioletred;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -12px;
+}
+
+.button:before {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    transform: rotate(90deg);
+    transition: all 0.4s ease;
+}
+.button:after {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.4s ease;
+}
+
+.nav2 {
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    background: #fff;
+    width: 100%;
+    border-radius: 5px;
+    transform: translateY(0%);
+    box-shadow: 2px 3px 10px 0 rgba(81, 81, 81, 0.1);
+    border: 1px solid #e4e4e4;
+    padding: 10px;
+    margin-right: 50%;
+    z-index: 12;
+    right: 5%;
+}
+.mosqueselect{
+    width: 30%;
+    margin-top: 30px;
+    margin-left: 65%;
+}
+
+#toggle:checked ~ .nav {
+    opacity: 1;
+    transform: translateY(10%);
+}
+
+#toggle:checked ~ .button:before {
+    transform: rotate(225deg);
+}
+
+#toggle:checked ~ .button:after {
+    transform: rotate(135deg);
+}
+
+.btnsubmit{
+    font-family: "B Titr", serif;
+    color: rgba(0,0,0,90%);
+    font-size: 20px;
+    margin-top: 5%;
+    height: 10%;
+    cursor: pointer;
+    width: 20%;
+    margin-left: 40%;
+    background-color: mediumspringgreen;
+    border-color: green;
+    border-radius: 5px;
+}
+
+.btnsubmit:hover{
+    color: white;
+}
+
+
+#mosquehadi{
+    margin: auto;
+    right: 5px;
+}
+
+.radif{
+    direction: rtl;
+    justify-content: space-between;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: row;
+
+}
+.squart{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+@media (max-width: 640px) {
+    .container {
+        width: 100%;
+    }
+    .radif{
+        direction: rtl;
+        margin-left: 20%;
+        margin-right: 20%;
+        display: flex;
+        flex-direction: column;
+    }
+    .title{
+        margin:auto;
+    }
+    #mosquehadi{
+        text-wrap: none;
+    }
+    .squart{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .programe{
+        width: 100%;
+    }
+    .explain{
+        word-break: break-all;
+        text-align: end;
+
+    }
+    .phone{
+        margin-top: 5%;
+    }
+    .squar{
+        width: 80%;
+        height: 30vh;
+        left: 8%;
+        top: 40%;
+    }
+    .logo{
+        margin-left: -50%;
+        margin-top: -150%;
+    }
+    .logo img{
+        width: 100%;
+        height: 30vh;
+    }
+    .poem{
+        margin-top: -5%;
+        margin-left: 15%;
+        font-size: 30px;
+    }
+}

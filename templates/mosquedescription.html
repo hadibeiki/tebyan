@@ -1,0 +1,20 @@
+<div id="mosquedata">
+    <p class="explain" >شما از {{ mosque.city.name }} مساجد {{ mosque.sex.name }} را انتخاب کرده اید.ظرفیت باقیمانده مسجد {{ mosque.velocity }} نفر است.قیمت برای معتکف در این مسجد {{ mosque.price }} تومان است</p>
+
+    <hr width="80%" color="white">
+    <h3 class="title" >برنامه ها و موقعیت مسجد</h3>
+    <h4 class="phone">{{ mosque.phone }}</h4>
+    <h4 class="title">{{ mosque.address }}</h4>
+    <div class="squart">
+        <textarea class="programe"></textarea>
+        <textarea disabled class="programe">{{ mosque.description|safe }}</textarea>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for item in galleries %}
+                <div class="swiper-slide"><img src="{{ item.mFile.url }}"></div>
+            {% endfor %}]
+            <!-- Add more slides as needed -->
+        </div>
+    </div>
+</div>

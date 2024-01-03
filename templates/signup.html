@@ -1,0 +1,101 @@
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <title>ثبت نام اعتکاف 1402</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+    <input type="checkbox" id="toggle" />
+    <label class="button" for="toggle"></label>
+    <p align="right" class="nav2">هادی بیکی بندرآبادی
+        این گونه می تواند فعالیت کند
+        مثلا در رختکن لباس های خود را در بیاورد
+        و پابرهنه به هخمه جا برود
+        lsaehrtfgd;jsd;lfjghl;sdkfjg
+        slihdfrlgshdflgsl;dghsl;dkhgsg;skldg;skldgj
+        lasdhlsdfkrglasdifrgl;ajsdrfghalsdfk</p>
+</div>
+<form method="post" action="{% url "signupurl" %}">
+    {% csrf_token %}
+    <div class="squarsign">
+        <h3 class="title">مشخصات فردی</h3>
+        <div class="radif" >
+            {{ form.melicode| as_crispy_field }}
+            {{ form.name| as_crispy_field }}
+            {{ form.family| as_crispy_field }}
+        </div>
+        <div class="radif" >
+            {{ form.education| as_crispy_field }}
+            {{ form.marital| as_crispy_field }}
+            {{ form.dad| as_crispy_field }}
+        </div>
+        <div class="radif">
+            {{ form.city| as_crispy_field }}
+            {{ form.sex| as_crispy_field }}
+            {{ form.age| as_crispy_field }}
+        </div>
+        <hr width="80%" color="white">
+        <div class="changeform" id="changeform">
+            <h3 class="title">انتخاب مسجد</h3>
+            {% include "selectmosque.html" %}
+           {% include 'mosquedescription.html' %}
+        </div>
+        <button class="btnsubmit" type="submit">پرداخت</button>
+    </div>
+</form>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 5,
+        spaceBetween: 150,
+        speed: 3000,
+        slidesPerGroup: 5,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        autoplay: {
+            delay: 5000,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        // Add more options as needed
+    });
+</script>
+<script>
+    document.getElementById("id_city").setAttribute("hx-get","{% url 'selectMosque' %}");
+    document.getElementById("id_city").setAttribute("hx-trigger","change");
+    document.getElementById("id_city").setAttribute("hx-target","#mosquehadi");
+    document.getElementById("id_city").setAttribute("hx-include","[name='sex'], [name='age']");
+
+    document.getElementById("id_sex").setAttribute("hx-get","{% url 'selectMosque'  %}");
+    document.getElementById("id_sex").setAttribute("hx-trigger","change");
+    document.getElementById("id_sex").setAttribute("hx-target","#mosquehadi");
+    document.getElementById("id_sex").setAttribute("hx-include","[name='city'], [name='age']");
+
+    document.getElementById("id_age").setAttribute("hx-get","{% url 'selectMosque'  %}");
+    document.getElementById("id_age").setAttribute("hx-trigger","change");
+    document.getElementById("id_age").setAttribute("hx-target","#mosquehadi");
+    document.getElementById("id_age").setAttribute("hx-include","[name='city'], [name='sex']");
+
+
+
+
+
+</script>
+</body>
+</html>
