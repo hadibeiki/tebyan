@@ -18,8 +18,8 @@ class galleryForm(forms.ModelForm):
             Div(
 
                 Row(
-                    Column('mosqe', css_class='form-group col-md-2 mb-0'),
-                    Column('mFile', css_class='form-group col-md-2 mb-0'),
+                    Column('mosqe', css_class='form-group col-md-3 mb-0'),
+                    Column('mFile', css_class='form-group col-md-3 mb-0'),
 
                 ),
                 css_class='mosqueform',

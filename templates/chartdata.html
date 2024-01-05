@@ -24,6 +24,9 @@
                 <div class="row mb-2">
                     <div class="col-sm-12">
                         <h1 style="float: right" class="title3">اطلاعات مربوط به {{ request.user.city.name }} </h1>
+                        <a href="{% url "alldata" request.user.id %}">
+                            <button style="width: 20%;" type="button" class="btn btn-block bg-gradient-success btn-lg">داده ها</button>
+                        </a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

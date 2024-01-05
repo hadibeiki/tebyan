@@ -25,6 +25,7 @@ class registerForm(forms.ModelForm):
                     Column('dad', css_class='form-group col-md-3 mb-0'),
                     Column('education', css_class='form-group col-md-3 mb-0'),
                     Column('marital', css_class='form-group col-md-3 mb-0'),
+                    Column('testimonial', css_class='form-group col-md-3 mb-0'),
 
                 ),
                 Row(

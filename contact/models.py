@@ -27,7 +27,7 @@ class Mcontact(models.Model):
 
 
     def __str__(self):
-        return self.mobile
+        return self.melicode
 
     class Meta:
         verbose_name_plural = "افراد"

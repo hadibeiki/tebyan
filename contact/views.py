@@ -18,27 +18,24 @@ from mosque.models import Mmosque
 from registerEatekaf.models import Mregistereatekaf
 
 
-def viewindex(request, ):
+def viewindex(request):
     if request.method == 'POST':
         if "mobile" in request.POST:
             try:
-                mobile = request.POST['mobile']
                 melicode = request.POST['melicode']
-                user = Mcontact.objects.get(mobile=mobile,melicode=melicode)
-                now = datetime.now(timezone.utc)
-                otp_time = user.otpcreatedtime
-                difftime = now - otp_time
-                if difftime.seconds > 120:
+                user = Mcontact.objects.get(melicode=melicode)
+                try:
+                    eatekafesh = Mregistereatekaf.objects.get(contact=user)
+                    messages.error(request, "شما قبلا ثبت نام کرده اید.")
+                    return HttpResponseRedirect(reverse('EatekafIndex'))
+                except:
+                    now = datetime.now(timezone.utc)
                     otp = rendomotp()
-                    # rest_test_send_sms(mobile, otp)
                     user.otp = otp
-                    user.otpcreatedtime = datetime.now(timezone.utc)
+                    user.otpcreatedtime = now
                     user.save()
-                    request.session['user-mobile'] = user.mobile
-                    request.session['user-melicode'] = user.melicode
-                    return HttpResponseRedirect(reverse('verify'))
-                else:
-                    messages.error(request, "کد تایید قبلا برای شما ارسال شده است")
+                    # rest_test_send_sms(request.POST['mobile'], otp)
+                    request.session['user-melicode'] = request.POST['melicode']
                     return HttpResponseRedirect(reverse('verify'))
             except:
                 now = datetime.now(timezone.utc)
@@ -58,17 +55,15 @@ def viewindex(request, ):
                         marital=1,
                         otp=otp,
                         otpcreatedtime=now,
+                        testimonial="",
                     )
                     # rest_test_send_sms(request.POST['mobile'], otp)
-                    request.session['user-mobile'] = request.POST['mobile']
                     request.session['user-melicode'] = request.POST['melicode']
                     return HttpResponseRedirect(reverse('verify'))
                 except:
-                    messages.error(request, "این کد ملی ثبت شده است لطفا با همان موبایل قبلی ثبت نام کنید")
-                    return HttpResponseRedirect(reverse('index'))
-
-
-    return render(request, "index.html")
+                    messages.error(request, "لطفا دوباره امتحان کنید")
+                    return HttpResponseRedirect(reverse('EatekafIndex'))
+    return render(request, "Eatekafindex.html")
 
 
 def rendomotp():
@@ -94,21 +89,20 @@ def rest_test_send_sms(mobile, otp):
 
 def Vverify(request):
     try:
-        mobile = request.session.get('user-mobile')
         melicode = request.session.get('user-melicode')
-        user = Mcontact.objects.get(mobile=mobile, melicode=melicode)
+        user = Mcontact.objects.get(melicode=melicode)
         if request.method == "POST":
             if not checkOtpExp(user.mobile, user.melicode):
                 messages.error(request, "کد اعتبار سنجی منقضی شده است")
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('EatekafIndex'))
             if user.otp != request.POST['otp']:
                 messages.error(request, "کد اعتبار سنجی صحیح نیست")
                 return HttpResponseRedirect(reverse('verify'))
-            return HttpResponseRedirect(reverse('urladdoreditcontact',kwargs={'melicode': user.melicode}))
+            return HttpResponseRedirect(reverse('urladdcontact',kwargs={'melicode': user.melicode}))
         return render(request, 'verify.html')
     except:
         messages.error(request, "کاربر با این مشخصات موجود نیست")
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('EatekafIndex'))
 
 
 def checkOtpExp(mobile,melicode):
@@ -124,13 +118,9 @@ def checkOtpExp(mobile,melicode):
         return False
 
 
-def viewaddoreditcontact(request,melicode):
+def viewaddcontact(request,melicode):
     selectcontact = Mcontact.objects.get(melicode=melicode)
-    try:
-        registeruser = Mregistereatekaf.objects.get(contact=selectcontact)
-        mosques = Mmosque.objects.filter(id=registeruser.mosque.id)
-    except:
-        mosques = Mmosque.objects.filter(city=1)
+    mosques = Mmosque.objects.filter(city=1)
 
     form = registerForm(instance=selectcontact)
     context = {

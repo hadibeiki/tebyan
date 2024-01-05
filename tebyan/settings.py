@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r_$2$$^l$3_&%w7jj8u_a3b-850&-+00+nikbx(7&*z#pn&^tc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'user.Muser'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,23 +91,23 @@ WSGI_APPLICATION = 'tebyan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'aaraf_db',
-#         'USER': 'aaraf_user',
-#         'PASSWORD': 'SepidehHadi6216468',
-#         'HOST': '87.107.155.67',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aaraf_db',
+        'USER': 'aaraf_user',
+        'PASSWORD': 'SepidehHadi6216468',
+        'HOST': '87.107.155.67',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -144,12 +144,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, '/')
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+#
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/root/tebyanStatic/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
@@ -166,21 +174,21 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'ZARINPAL': {
-           'MERCHANT_CODE': '<YOUR MERCHANT CODE>',
+           'MERCHANT_CODE': '26dd7fc6-8fe9-4fa7-9fb0-463954a4bf58',
            'SANDBOX': 0,  # 0 disable, 1 active
        },
    },
    'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
-   'DEFAULT': 'BMI',
+   'DEFAULT': 'ZARINPAL',
    'CURRENCY': 'IRR', # اختیاری
    'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
    'TRACKING_CODE_LENGTH': 16, # اختیاری
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
-   'BANK_PRIORITIES': [
-       'BMI',
-       'SEP',
-       # and so on ...
-   ], # اختیاری
+   # 'BANK_PRIORITIES': [
+   #     'BMI',
+   #     'SEP',
+   #     # and so on ...
+   # ], # اختیاری
    'IS_SAFE_GET_GATEWAY_PAYMENT': False, #اختیاری، بهتر است True بزارید.
    'CUSTOM_APP': None, # اختیاری
 }

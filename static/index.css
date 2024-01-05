@@ -1,0 +1,156 @@
+.inedexback{
+    width: 100%;
+    height: 100%;
+    background-image: url("img/back.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 0;
+}
+.myWork{
+    width: 100%;
+    height: 46vh;
+    display: flex;
+    flex-direction: row;
+}
+.navbar{
+    direction: rtl;
+    width: 100%;
+    height: 7vh;
+    background-color: #FDECCE;
+    top: 40px;
+    display: flex;
+    flex-direction: row;
+}
+.navitem{
+    font-family: "B Titr", sans-serif;
+    font-size: 21px;
+    padding: 20px;
+    margin-top: -1%;
+    margin-right: 12%;
+}
+
+.navitem a:link{
+    color: black;
+}
+
+.logo{
+    object-fit: cover;
+    background-color: #4f4128;
+    position: absolute;
+    width: 8%;
+    height: 12vh;
+    right: 10%;
+    z-index: 100;
+    border-radius: 0px 0px 15px 15px;
+    margin-right: 10%;
+}
+
+.big{
+    width: 40%;
+    height: 85vh;
+}
+.big img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.mainproject{
+    width: 50%;
+    height: 85vh;
+    background-color: #FDECCE;
+}
+.mainproject img{
+    margin-left: 20%;
+    margin-top: 10%;
+}
+.sidemenu{
+    width: 5%;
+    height: 85vh;
+    background-color: #FDECCE;
+    border-width: 0.2px;
+    border-style: solid;
+    border-color: #bfaf91;
+}
+
+.myitems{
+    width: 90%;
+    height: 20vh;
+    margin-top: 50%;
+    margin-left: 15%;
+}
+
+.myitems img{
+    width: 70%;
+    height: 40%;
+    padding: 2%;
+    margin: auto ;
+    margin-top: 5%;
+    border-radius: 50px;
+}
+.myitems h5{
+    font-family: "B Titr",sans-serif;
+    font-size: 13px;
+    margin-left: -5%;
+    margin-top: 5%;
+}
+.twoice{
+    margin-top: -40%;
+}
+
+a:link{
+    color: black;
+}
+a:hover {
+    color: white;
+}
+
+.poem{
+    margin-left: 35%;
+    margin-top: 19%;
+}
+.poem p{
+    font-family: "B Titr", sans-serif;
+    font-size: 16px;
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        display: none;
+    }
+    .myWork{
+        display: flex;
+        flex-direction: column;
+    }
+    .sidemenu{
+        margin: auto;
+        width: 100%;
+        height: 18vh;
+        display: flex;
+        flex-direction: row;
+        order: 1;
+    }
+    .myitems{
+        margin-top: 5%;
+    }
+    .mainproject{
+        width: 100%;
+        order: 3;
+    }
+    .mainproject img{
+        margin-left: 10%;
+    }
+    .big{
+        width: 100%;
+        order: 2;
+    }
+
+    .poem{
+        margin-top: 150%;
+        margin-left: 15%;
+        white-space: nowrap;;
+    }
+
+
+}

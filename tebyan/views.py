@@ -8,15 +8,23 @@ from mosque.models import Mmosque
 from registerEatekaf.models import Mregistereatekaf
 
 
-def admin2View(request,):
+def admin2View(request, ):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('alldata',id=user.id)
+            return redirect('alldata', id=user.id)
         else:
             messages.info(request, "نام کاربری یا رمز عبور اشتباه است")
             return redirect('admin2')
-    return render(request, "login.html",)
+    return render(request, "login.html", )
+
+
+def Vindex(request, ):
+    return render(request, "index.html", )
+
+
+def Eatekafindex(request, ):
+    return render(request, "Eatekafindex.html", )

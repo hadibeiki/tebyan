@@ -17,7 +17,8 @@ Including another URLconf
 from azbankgateways.urls import az_bank_gateways_urls
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 from tebyan import views
 
 admin.autodiscover()
@@ -25,6 +26,7 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin2/', views.admin2View, name='admin2'),
+    path('', views.Vindex, name='index'),
 
 
     path("", include('mosque.urls')),
@@ -33,3 +35,6 @@ urlpatterns = [
     path("", include('contact.urls')),
     path('bankgateways/', az_bank_gateways_urls()),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

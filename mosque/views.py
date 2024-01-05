@@ -5,10 +5,14 @@ from django.contrib import messages
 from gallery.models import Mgallery
 from mosque.models import Mmosque
 from mosque.forms import mosqueForm
+from geopy.geocoders import Nominatim
+import folium
 
 
 def selectMosque(request,):
     selectage = request.GET['age']
+
+
     if selectage =='':
         selectage = 0
     selectmosque = Mmosque.objects.filter(Q(sex_id=request.GET['sex']) & Q(city_id=request.GET['city']))
@@ -23,7 +27,18 @@ def mosquedetail(request):
     selectMosque = Mmosque.objects.get(id=mosquedata)
     galleries = Mgallery.objects.filter(mosqe=selectMosque)
 
+    geolocattion = Nominatim(user_agent='measurements')
+    # kashan = geolocattion.geocode("kashan")
+    # d_late = selectMosque.latitude
+    # d_long = selectMosque.longitude
+    pointA = (selectMosque.latitude, selectMosque.longtude)
+    m = folium.Map(width=1500, height=400, location=pointA)
+    m.fit_bounds([[30.058100, 57.347689],[32.832000, 52.774325]])
+    folium.Marker([selectMosque.latitude, selectMosque.longtude], tooltip=str(selectMosque.name), popup=str(selectMosque.name), icon=folium.Icon(color='purple')).add_to(m)
+    m = m._repr_html_()
+
     context = {
+        'map':m,
         'mosque':selectMosque,
         'galleries':galleries,
     }
@@ -49,3 +64,4 @@ def mosquedit(request, id):
     }
 
     return render(request, "mosqueedit.html", context)
+

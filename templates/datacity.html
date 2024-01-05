@@ -25,7 +25,18 @@
 <div style="direction: rtl" class="container-fluid">
     <div class="card card-primary card-outline">
         <div class="card-body">
-            <h4 class="title3" style="margin-left: 80%">اطلاعات مربوط به {{ request.user.city.name }} </h4>
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1 style="float: right" class="title3">اطلاعات مربوط به {{ request.user.city.name }} </h1>
+                            <a href="{% url "reqporturl" request.user.id %}">
+                                <button style="width: 20%;float: left" type="button" class="btn btn-block bg-gradient-danger btn-lg">اطلاعات آماری</button>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
             <div class="row">
                 <div class="col-5 col-sm-3">
                     <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
@@ -123,7 +134,7 @@
                                         <tbody>
                                         {% for item in mosques %}
                                             <tr>
-                                                <td>{{ item.name }}</td>
+                                                <td> <a href="{% url "editMosque" item.id %}">{{ item.name }}</a></td>
                                                 <td>{{ item.sex.name }}</td>
                                                 <td>{{ item.velocity }}</td>
                                                 <td>{{ item.startage }}</td>

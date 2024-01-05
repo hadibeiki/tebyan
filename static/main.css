@@ -16,6 +16,17 @@ body{
     position: relative;
     z-index: 0;
 }
+
+.inedexback{
+    width: 100%;
+    height: 100%;
+    background-image: url("img/back.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 0;
+}
 .squar{
     width: 30%;
     height: 40vh;
@@ -185,6 +196,9 @@ option[value="3"]{
     margin-top: 2%;
     color: #f1f1f1;
 }
+.explain2{
+    display: none;
+}
 .hadi{
     width: 300px;
 }
@@ -200,6 +214,9 @@ option[value="3"]{
     height: 250px;
     border-radius: 10px;
 
+}
+textarea[disabled] {
+   color: white;
 }
 
 ::-webkit-scrollbar-thumb{
@@ -343,7 +360,7 @@ option[value="3"]{
     font-family: "B Titr", serif;
     color: rgba(0,0,0,90%);
     font-size: 20px;
-    margin-top: 5%;
+    margin-top: 15%;
     height: 10%;
     cursor: pointer;
     width: 20%;
@@ -377,6 +394,12 @@ option[value="3"]{
     flex-direction: row;
     width: 100%;
 }
+
+.testimonial{
+    display: none;
+    width: 20%;
+    float: right;
+}
 @media (max-width: 640px) {
     .container {
         width: 100%;
@@ -403,22 +426,28 @@ option[value="3"]{
         width: 100%;
     }
     .explain{
-        word-break: break-all;
+        display: none;
+    }
+    .explain2{
+        font-family: "B Titr", serif;
+        font-size: 20px;
+        margin-top: 2%;
+        color: #f1f1f1;
+        display: flex;
         text-align: end;
-
     }
     .phone{
         margin-top: 5%;
     }
     .squar{
         width: 80%;
-        height: 30vh;
-        left: 8%;
+        height: 40vh;
+        left: 5%;
         top: 40%;
     }
     .logo{
-        margin-left: -50%;
-        margin-top: -150%;
+        margin-left: 20%;
+        margin-top: -140%;
     }
     .logo img{
         width: 100%;
@@ -426,7 +455,31 @@ option[value="3"]{
     }
     .poem{
         margin-top: -5%;
-        margin-left: 15%;
-        font-size: 30px;
+        margin-left: 10%;
+        font-size: 15px;
+    }
+    .testimonial{
+        display: none;
+        direction: rtl;
+        width: 100%;
+        float: right;
+    }
+    .btnsubmit{
+        font-family: "B Titr", serif;
+        color: rgba(0,0,0,90%);
+        font-size: 20px;
+        margin-top: 10%;
+        height: 10%;
+        cursor: pointer;
+        width: 40%;
+        margin-left: 40%;
+        background-color: mediumspringgreen;
+        border-color: green;
+        border-radius: 5px;
+    }
+    .mosqueselect{
+        width: 100%;
+        margin-top: 30px;
+        margin-left: 25%;
     }
 }

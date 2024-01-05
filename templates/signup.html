@@ -12,21 +12,12 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "main.css" %}">
+
 </head>
 <body>
 <div class="background"></div>
-<div class="container">
-    <input type="checkbox" id="toggle" />
-    <label class="button" for="toggle"></label>
-    <p align="right" class="nav2">هادی بیکی بندرآبادی
-        این گونه می تواند فعالیت کند
-        مثلا در رختکن لباس های خود را در بیاورد
-        و پابرهنه به هخمه جا برود
-        lsaehrtfgd;jsd;lfjghl;sdkfjg
-        slihdfrlgshdflgsl;dghsl;dkhgsg;skldg;skldgj
-        lasdhlsdfkrglasdifrgl;ajsdrfghalsdfk</p>
-</div>
-<form method="post" action="{% url "signupurl" %}">
+
+<form method="post" action="{% url "signupurl" %}" enctype='multipart/form-data'>
     {% csrf_token %}
     <div class="squarsign">
         <h3 class="title">مشخصات فردی</h3>
@@ -49,9 +40,12 @@
         <div class="changeform" id="changeform">
             <h3 class="title">انتخاب مسجد</h3>
             {% include "selectmosque.html" %}
-           {% include 'mosquedescription.html' %}
+            {% include 'mosquedescription.html' %}
         </div>
-        <button class="btnsubmit" type="submit">پرداخت</button>
+        <div class="testimonial" id="testimonial">
+            {{ form.testimonial| as_crispy_field }}
+        </div>
+        <button id="submit" class="btnsubmit" type="submit">پرداخت</button>
     </div>
 </form>
 <script>
@@ -93,8 +87,21 @@
     document.getElementById("id_age").setAttribute("hx-include","[name='city'], [name='sex']");
 
 
+    id_age.addEventListener("input", function (e) {
+        if (document.getElementById("id_age").value < 18){
+            document.getElementById("testimonial").style.display = "block";
+        }
+        else {
+            document.getElementById("testimonial").style.display = "None";
+        }
+    });
 
-
+    document.getElementById("submit").onclick = function(e) {
+        if (document.getElementById("id_testimonial").value === "") {
+            e.preventDefault();
+            alert("لطفا فایل رضایت نامه را آپلود نمایید");
+        }
+    }
 
 </script>
 </body>
