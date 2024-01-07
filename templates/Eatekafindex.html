@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static "plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" %}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{% static "plugins/toastr/toastr.min.css" %}">
+    <link rel="stylesheet" href="{% static "/dist/css/adminlte.min.css" %}">
     <link rel="stylesheet" href="{% static "main.css" %}">
 </head>
 <body>
@@ -20,6 +21,10 @@
     <div class="position">
         <h3>سامانه جامع اعتکاف مساجد</h3>
         <h3 style="margin-top: 1%">اداره کل تبلیغات اسلامی استان یزد</h3>
+        <button type="button" class="btn btn-block btn-success btn-lg" data-toggle="modal" data-target="#modal-lg">
+            قوانین اعتکاف
+        </button>
+
     </div>
 </div>
 <p class="poem">تمام حقوق اين وب ‌سايت برای اداره کل تبلیغات اسلامی استان یزد است</p>
@@ -35,6 +40,29 @@
             <button class="btnok" type="submit">تایید</button>
         </div>
     </form>
+</div>
+<div class="modal fade" id="modal-lg" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">قوانین اعتکاف</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body columns">
+                    <p> دانلود فایل رضایت نامه برای گروه های سنی زیر 18 سال </p><a href=""><p style="margin-right: 1%"> دانلود </p></a><br>
+                    <p style="margin-right: -44%"> دانلود فایل میثاق نامه اعتکاف </p><a href=""><p style="margin-right: -23%"> دانلود </p></a><br>
+                    <p> دانلود فایل میثاق نامه اعتکاف </p><a href=""><p style="margin-right: 1%"> دانلود </p></a><br>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <script>
     function validateForm() {

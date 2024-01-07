@@ -25,8 +25,8 @@ def allData(request, id):
     mosqueform = mosqueForm()
     galleryform = galleryForm()
     galleryform.fields["mosqe"].queryset = Mmosque.objects.filter(city=request.user.city)
-    eatekaf = Mregistereatekaf.objects.all()
-    mosques = Mmosque.objects.all()
+    eatekaf = Mregistereatekaf.objects.filter(contact__city=request.user.city)
+    mosques = Mmosque.objects.filter(city=request.user.city)
 
     if request.method =="POST":
         update_request = request.POST.copy()
@@ -55,52 +55,55 @@ def signupview(request):
                 form.save()
                 try:
                     selectuser = Mregistereatekaf.objects.get(contact__melicode=user.melicode)
-                    go_to_gateway_view(request, mosque.id, selectuser.melicode)
+                    url = reverse('gotogetway', kwargs={'id': selectuser.id, 'mosque':mosque.id})
+                    return HttpResponseRedirect(url)
                 except:
                     Mregistereatekaf.objects.create(
                         contact=user,
                         mosque=mosque,
                         payment="خیر",
                     )
-                    go_to_gateway_view(request,mosque.id, user.melicode)
+                    url = reverse('gotogetway', kwargs={'id': user.id, 'mosque': mosque.id})
+                    return HttpResponseRedirect(url)
     context = {
         'form':form
     }
     return render(request, "signup.html", context)
 
 
-def go_to_gateway_view(request,id, melicode):
-    selectMosque = Mmosque.objects.get(id=id)
-    user = Mcontact.objects.get(melicode=melicode)
-
+def go_to_gateway_view(request,id,mosque):
+    selectRegister = Mregistereatekaf.objects.get(Q(contact_id=id) and Q(mosque_id=mosque))
     # خواندن مبلغ از هر جایی که مد نظر است
-    amount = int(selectMosque.price)
+    amount = selectRegister.mosque.price
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
-    user_mobile_number = str(user.mobile)  # اختیاری
+    user_mobile_number = str(selectRegister.contact.mobile)  # اختیاری
 
     factory = bankfactories.BankFactory()
     try:
-        bank = factory.auto_create(bank_models.BankType.ZARINPAL)  # or factory.create(bank_models.BankType.BMI) or set identifier
+        bank = factory.auto_create()  # or factory.create(bank_models.BankType.BMI) or set identifier
         bank.set_request(request)
         bank.set_amount(amount)
-
         # یو آر ال بازگشت به نرم افزار برای ادامه فرآیند
-        bank.set_client_callback_url(reverse('callback-gateway', kwargs={'melicode':melicode,'id':id}))
-        bank.set_mobile_number(user.mobile)  # اختیاری
+        bank.set_client_callback_url(reverse('callback-gateway', kwargs={'id': selectRegister.id}))
+        bank.set_mobile_number(user_mobile_number)  # اختیاری
 
         # در صورت تمایل اتصال این رکورد به رکورد فاکتور یا هر چیزی که بعدا بتوانید ارتباط بین محصول یا خدمات را با این
         # پرداخت برقرار کنید.
         bank_record = bank.ready()
 
         # هدایت کاربر به درگاه بانک
-        return bank.redirect_gateway()
+        # return bank.redirect_gateway()
+        context = bank.get_gateway()
+        return render(request, 'redirect_to_bank.html', context=context)
     except AZBankGatewaysException as e:
         logging.critical(e)
-        raise e
+        return render(request, 'redirect_to_bank.html')
+        # raise e
 
 
 
-def callback_gateway_view(request,melicode,id):
+def callback_gateway_view(request, id):
+    selectregister = Mregistereatekaf.objects.get(id=id)
     tracking_code = request.GET.get(settings.TRACKING_CODE_QUERY_PARAM, None)
     if not tracking_code:
         logging.debug("این لینک معتبر نیست.")
@@ -114,19 +117,18 @@ def callback_gateway_view(request,melicode,id):
 
     # در این قسمت باید از طریق داده هایی که در بانک رکورد وجود دارد، رکورد متناظر یا هر اقدام مقتضی دیگر را انجام دهیم
     if bank_record.is_success:
+        selectregister.payment = "بله"
+        selectregister.save()
+
         # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
         # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
-        user = Mregistereatekaf.objects.get(Q(contact__melicode=melicode) and Q(mosque_id=id))
-        user.pyorno="بله"
-        user.save()
         messages.info(request, "با موفقیت انجام شد")
-        return redirect("successPay",)
+        return redirect("successPay", id=selectregister.id)
+        # return HttpResponse("پرداخت با موفقیت انجام شد.")
 
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
-
-    Mregistereatekaf.objects.get(Q(contact__melicode=melicode) and Q(mosque_id=id)).delete()
-    return HttpResponse(
-        "پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
+    selectregister.delete()
+    return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
 
 
 def reportview(request, id):
@@ -166,8 +168,8 @@ def reportview(request, id):
     return render(request, "chartdata.html", context)
 
 
-def successView(request, melicode):
-    selectEatekaf = Mregistereatekaf.objects.get(contact__melicode=melicode)
+def successView(request, id):
+    selectEatekaf = Mregistereatekaf.objects.get(id=id)
     contact ={
         "user":selectEatekaf
     }

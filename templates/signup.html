@@ -97,9 +97,11 @@
     });
 
     document.getElementById("submit").onclick = function(e) {
-        if (document.getElementById("id_testimonial").value === "") {
-            e.preventDefault();
-            alert("لطفا فایل رضایت نامه را آپلود نمایید");
+        if (document.getElementById('testimonial').style.display !== "none") {
+            if (document.getElementById("id_testimonial").value === "") {
+                e.preventDefault();
+                alert("لطفا فایل رضایت نامه را آپلود نمایید");
+            }
         }
     }
 

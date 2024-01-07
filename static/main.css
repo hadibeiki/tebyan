@@ -219,6 +219,15 @@ textarea[disabled] {
    color: white;
 }
 
+.modal-body p{
+    text-align: right;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "B Titr", sans-serif;
+
+}
+
 ::-webkit-scrollbar-thumb{
     background-color: mediumspringgreen;
     width: 5%;

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r_$2$$^l$3_&%w7jj8u_a3b-850&-+00+nikbx(7&*z#pn&^tc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'user.Muser'
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['tebyanyazd.ir','www.tebyanyazd.ir','127.0.0.1']
 
 
 # Application definition
@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'tebyan.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aaraf_db',
-        'USER': 'aaraf_user',
+        'NAME': 'tebyan_db',
+        'USER': 'tebyan_user',
         'PASSWORD': 'SepidehHadi6216468',
-        'HOST': '87.107.155.67',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -184,11 +184,8 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
    'TRACKING_CODE_LENGTH': 16, # اختیاری
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
-   # 'BANK_PRIORITIES': [
-   #     'BMI',
-   #     'SEP',
-   #     # and so on ...
-   # ], # اختیاری
    'IS_SAFE_GET_GATEWAY_PAYMENT': False, #اختیاری، بهتر است True بزارید.
    'CUSTOM_APP': None, # اختیاری
 }
+
+
