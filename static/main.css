@@ -222,7 +222,7 @@ textarea[disabled] {
 .modal-body p{
     text-align: right;
     float: right;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     font-family: "B Titr", sans-serif;
 
@@ -405,9 +405,16 @@ textarea[disabled] {
 }
 
 .testimonial{
-    display: none;
+    display: flex;
+    flex-direction: row;
     width: 20%;
     float: right;
+    margin-right: 15%;
+}
+.testimonial p{
+    color: white;
+    margin-top: 5%;
+    margin-right: 5%;
 }
 @media (max-width: 640px) {
     .container {
@@ -468,7 +475,6 @@ textarea[disabled] {
         font-size: 15px;
     }
     .testimonial{
-        display: none;
         direction: rtl;
         width: 100%;
         float: right;

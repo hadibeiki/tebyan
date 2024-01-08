@@ -11,8 +11,6 @@ import folium
 
 def selectMosque(request,):
     selectage = request.GET['age']
-
-
     if selectage =='':
         selectage = 0
     selectmosque = Mmosque.objects.filter(Q(sex_id=request.GET['sex']) & Q(city_id=request.GET['city']))
@@ -50,11 +48,11 @@ def mosquedit(request, id):
     form = mosqueForm(instance=selectMosque)
 
     if request.method == "POST":
-        form = mosqueForm(request.POST or None, instance=selectMosque)
+        update_request = request.POST.copy()
+        update_request.update({'city': str(request.user.city.id)})
+        form = mosqueForm(update_request or None, instance=selectMosque)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.city = request.user.city
-            obj.save()
+            form.save()
             messages.success(request, "حله ذخیره شد")
             return redirect('alldata',id=request.user.id)
 

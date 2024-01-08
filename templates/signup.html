@@ -17,7 +17,7 @@
 <body>
 <div class="background"></div>
 
-<form method="post" action="{% url "signupurl" %}" enctype='multipart/form-data'>
+<form name="myform" method="post" action="{% url "signupurl" %}" enctype='multipart/form-data' onsubmit="return checkCheckBoxes(this);">
     {% csrf_token %}
     <div class="squarsign">
         <h3 class="title">مشخصات فردی</h3>
@@ -36,18 +36,31 @@
             {{ form.sex| as_crispy_field }}
             {{ form.age| as_crispy_field }}
         </div>
-        <hr width="80%" color="white">
+        <div class="testimonial" id="testimonial">
+            <p>با قوانین اعتکاف موافقم</p>
+            {{ form.testimonial }}
+        </div>
+        <hr style="margin-top: 5%" width="80%" color="white">
         <div class="changeform" id="changeform">
             <h3 class="title">انتخاب مسجد</h3>
             {% include "selectmosque.html" %}
             {% include 'mosquedescription.html' %}
         </div>
-        <div class="testimonial" id="testimonial">
-            {{ form.testimonial| as_crispy_field }}
-        </div>
+
         <button id="submit" class="btnsubmit" type="submit">پرداخت</button>
     </div>
 </form>
+<script type="text/javascript" language="JavaScript">
+function checkCheckBoxes(myform) {
+	if (myform.testimonial.checked === false)
+	{
+		alert ('لطفا با قوانین اعتکاف موافقت کنید.باتشکر');
+		return false;
+	} else {
+		return true;
+	}
+}
+</script>
 <script>
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 5,
@@ -85,25 +98,6 @@
     document.getElementById("id_age").setAttribute("hx-trigger","change");
     document.getElementById("id_age").setAttribute("hx-target","#mosquehadi");
     document.getElementById("id_age").setAttribute("hx-include","[name='city'], [name='sex']");
-
-
-    id_age.addEventListener("input", function (e) {
-        if (document.getElementById("id_age").value < 18){
-            document.getElementById("testimonial").style.display = "block";
-        }
-        else {
-            document.getElementById("testimonial").style.display = "None";
-        }
-    });
-
-    document.getElementById("submit").onclick = function(e) {
-        if (document.getElementById('testimonial').style.display !== "none") {
-            if (document.getElementById("id_testimonial").value === "") {
-                e.preventDefault();
-                alert("لطفا فایل رضایت نامه را آپلود نمایید");
-            }
-        }
-    }
 
 </script>
 </body>

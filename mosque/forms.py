@@ -10,7 +10,6 @@ class mosqueForm(forms.ModelForm):
     class Meta():
         model = Mmosque
         fields = '__all__'
-        exclude = ('city',)
 
 
     def __init__(self, *args, **kwargs):

@@ -23,7 +23,7 @@ class Mcontact(models.Model):
     marital = models.CharField(max_length=50, verbose_name="وضعیت تاهل", choices=Marital)
     otp = models.CharField(max_length=10, verbose_name="کد احراز هویت")
     otpcreatedtime = models.DateTimeField(verbose_name="زمان ایجاد کد احراز هویت", default=timezone.now)
-    testimonial = models.FileField(upload_to="media/testimonial",verbose_name="رضایت نامه", blank=True, null=True)
+    testimonial = models.BooleanField(verbose_name="رضایت نامه",)
 
 
     def __str__(self):
