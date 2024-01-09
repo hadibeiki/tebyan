@@ -118,13 +118,10 @@ def callback_gateway_view(request, id):
     # در این قسمت باید از طریق داده هایی که در بانک رکورد وجود دارد، رکورد متناظر یا هر اقدام مقتضی دیگر را انجام دهیم
     if bank_record.is_success:
         selectregister.payment = "بله"
-        selectmosque = Mmosque.objects.get(id=Mregistereatekaf.mosque.id)
+        selectmosque = Mmosque.objects.get(id=selectregister.mosque.id)
         selectmosque.velocity = selectmosque.velocity-1
         selectmosque.save()
         selectregister.save()
-
-        # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
-        # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
         messages.info(request, "با موفقیت انجام شد")
         return redirect("successPay", id=selectregister.id)
         # return HttpResponse("پرداخت با موفقیت انجام شد.")
