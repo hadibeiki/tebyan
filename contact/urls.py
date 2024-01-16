@@ -7,5 +7,6 @@ urlpatterns = [
     path('addcontact/<str:melicode>/', views.viewaddcontact, name='urladdcontact'),
     path('verify/', views.Vverify, name='verify'),
     path('delete/<str:melicode>', views.deletecontact, name='deletecontact'),
+    path('confirm/<str:melicode>', views.confirmcontact, name='confirmcontact'),
 
 ]

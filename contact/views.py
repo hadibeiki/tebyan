@@ -137,3 +137,11 @@ def deletecontact(request,melicode):
     Mregistereatekaf.objects.get(contact__melicode=melicode).delete()
     messages.success(request, "کاربر حذف شد")
     return redirect('alldata',id=request.user.id)
+
+
+def confirmcontact(request,melicode):
+    selectEatekaf = Mregistereatekaf.objects.get(contact__melicode=melicode)
+    selectEatekaf.payment = "بله"
+    selectEatekaf.save()
+    messages.success(request, "کاربر تایید شد")
+    return redirect('alldatamosque',id=request.user.id)

@@ -21,6 +21,19 @@ def admin2View(request, ):
             return redirect('admin2')
     return render(request, "login.html", )
 
+def admin3View(request, ):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('alldatamosque', id=user.id)
+        else:
+            messages.info(request, "نام کاربری یا رمز عبور اشتباه است")
+            return redirect('admin2')
+    return render(request, "login2.html", )
+
 
 def Vindex(request, ):
     return render(request, "index.html", )

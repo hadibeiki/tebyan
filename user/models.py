@@ -30,6 +30,7 @@ class MyAccountManager(BaseUserManager):
 class Muser(AbstractBaseUser,PermissionsMixin):
 
     city = models.ForeignKey('city.Mcity', verbose_name="شهرستان", on_delete=models.CASCADE, null=True, blank=True)
+    mosque = models.ForeignKey('mosque.Mmosque', verbose_name="نام مسجد", on_delete=models.CASCADE, null=True, blank=True)
     username = models.CharField(max_length=100, verbose_name="نام کاربری", unique = True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

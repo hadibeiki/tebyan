@@ -26,6 +26,7 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin2/', views.admin2View, name='admin2'),
+    path('adminmosque/', views.admin3View, name='admin3'),
     path('', views.Vindex, name='index'),
 
 

@@ -12,7 +12,7 @@ class Mregistereatekaf(models.Model):
 
 
     def __str__(self):
-        return self.id
+        return self.mosque.name
 
     class Meta:
         verbose_name_plural = "ثبت نام های اعتکاف"

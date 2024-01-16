@@ -100,7 +100,7 @@ def signupview(request):
             #         payment="خیر",
             #     )
             #     url = reverse('gotogetway', kwargs={'melicode': user.melicode, 'mosque': mosque.id})
-            return HttpResponseRedirect(url)
+            # return HttpResponseRedirect(url)
     context = {
         'form':form
     }
@@ -211,3 +211,10 @@ def successView(request, id):
     }
 
     return render(request, "success.html", contact)
+
+def allDataMosque(request, id):
+    eatekaf = Mregistereatekaf.objects.filter(mosque=request.user.mosque)
+    context = {
+        'eatekaf': eatekaf,
+    }
+    return render(request, "datacityMosque.html", context)
