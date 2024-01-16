@@ -93,11 +93,11 @@ body{
     height: 30px;
     font-size: 20px;
     margin-left: 1%;
-    margin-top: 15%;
+    margin-top: 5%;
     border-radius: 8px 0px 0px 8px;
 }
 .btnok{
-    margin-top: 15%;
+    margin-top: 5%;
     font-family: "B Mitra", serif;
     width: 15%;
     height: 15%;
@@ -185,9 +185,6 @@ body{
     text-align: end;
     color: #f1f1f1;
 }
-option[value="3"]{
-    display:none;
-}
 .explain{
     font-family: "B Titr", serif;
     white-space: nowrap;
@@ -216,7 +213,7 @@ option[value="3"]{
 
 }
 textarea[disabled] {
-   color: white;
+    color: white;
 }
 
 .modal-body p{
@@ -411,14 +408,42 @@ textarea[disabled] {
     float: right;
     margin-right: 15%;
 }
+.mymap{
+    width: 50%;
+    height: 20vh;
+}
 .testimonial p{
     color: white;
     margin-top: 5%;
     margin-right: 5%;
 }
+
+.ability {
+    float: right;
+    margin-right: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.abilitychoice p {
+    color: white;
+    margin-top: 16%;
+    white-space: nowrap;
+}
+.abilitychoice{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    margin-right: 10%;
+}
+
 @media (max-width: 640px) {
     .container {
         width: 100%;
+    }
+    .mymap{
+        width: 100%;
+        height: 20vh;
     }
     .radif{
         direction: rtl;
@@ -439,6 +464,7 @@ textarea[disabled] {
         width: 100%;
     }
     .programe{
+        margin-top: 30%;
         width: 100%;
     }
     .explain{
@@ -496,5 +522,22 @@ textarea[disabled] {
         width: 100%;
         margin-top: 30px;
         margin-left: 25%;
+    }
+    .ability {
+        margin-right: -60%;
+        width: 100%;
+        float: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .abilitychoice{
+        float: right;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    .abilitychoice p {
+        color: white;
     }
 }

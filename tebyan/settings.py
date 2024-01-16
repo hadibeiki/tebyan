@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'gallery.apps.GalleryConfig',
     'contact.apps.ContactConfig',
     'registerEatekaf.apps.RegisterEatekafConfig',
+    'ability.apps.AbilityConfig',
 
 ]
 
@@ -175,7 +176,7 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'ZARINPAL': {
            'MERCHANT_CODE': '26dd7fc6-8fe9-4fa7-9fb0-463954a4bf58',
-           'SANDBOX': 1,  # 0 disable, 1 active
+           'SANDBOX': 0,  # 0 disable, 1 active
        },
    },
    'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است

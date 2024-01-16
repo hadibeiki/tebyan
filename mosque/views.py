@@ -13,7 +13,9 @@ def selectMosque(request,):
     selectage = request.GET['age']
     if selectage =='':
         selectage = 0
-    selectmosque = Mmosque.objects.filter(Q(sex_id=request.GET['sex']) & Q(city_id=request.GET['city']) & Q(endage__gt=selectage) & Q(startage__lte=selectage) & Q(velocity__gt=0))
+    firstselectmosque = Mmosque.objects.filter(Q(sex_id=request.GET['sex']) & Q(city_id=request.GET['city']) & Q(endage__gt=selectage) & Q(startage__lte=selectage) & Q(velocity__gt=0))
+    secondselectmosque = Mmosque.objects.filter(Q(sex_id= 3) & Q(city_id=request.GET['city']) & Q(endage__gt=selectage) & Q(startage__lte=selectage) & Q(velocity__gt=0))
+    selectmosque = firstselectmosque | secondselectmosque
     context = {
         'mosques': selectmosque,
     }

@@ -32,6 +32,7 @@ class mosqueForm(forms.ModelForm):
                     Column('startage', css_class='form-group col-md-2 mb-0'),
                     Column('endage', css_class='form-group col-md-2 mb-0 '),
                     Column('phone', css_class='form-group col-md-2 mb-0 '),
+                    Column('link', css_class='form-group col-md-2 mb-0 '),
 
                 ),
                 Row(

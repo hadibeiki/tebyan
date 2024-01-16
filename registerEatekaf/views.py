@@ -12,6 +12,7 @@ from azbankgateways import bankfactories, models as bank_models, default_setting
 # Create your views here.
 from django.urls import reverse
 
+from ability.forms import abilityForm
 from contact.forms import registerForm
 from contact.models import Mcontact
 from gallery.forms import galleryForm
@@ -51,28 +52,63 @@ def signupview(request):
         user = Mcontact.objects.get(melicode=request.POST['melicode'])
         mosque = Mmosque.objects.get(id=request.POST['mosque'])
         form = registerForm(request.POST or None, request.FILES or None, instance=user)
+        update_request = request.POST.copy()
+        update_request.update({'contact': str(user.id)})
+        abilityform = abilityForm(update_request or None)
+        if abilityform.is_valid():
+            abilityform.save()
         if form.is_valid():
-                form.save()
-                try:
-                    selectuser = Mregistereatekaf.objects.get(contact__melicode=user.melicode)
-                    url = reverse('gotogetway', kwargs={'id': selectuser.id, 'mosque':mosque.id})
-                    return HttpResponseRedirect(url)
-                except:
-                    Mregistereatekaf.objects.create(
-                        contact=user,
-                        mosque=mosque,
-                        payment="خیر",
-                    )
-                    url = reverse('gotogetway', kwargs={'id': user.id, 'mosque': mosque.id})
-                    return HttpResponseRedirect(url)
+            form.save()
+            Mregistereatekaf.objects.create(
+                contact=user,
+                mosque=mosque,
+                payment="خیر",
+            )
+            mosque.velocity = mosque.velocity - 1
+            mosque.save()
+            selectregister = Mregistereatekaf.objects.get(Q(contact=user) and Q(mosque=mosque))
+            messages.success(request, "با موفقیت انجام شد")
+            return redirect("successPay", id=selectregister.id)
+            # if mosque.link != "0":
+            #     Mregistereatekaf.objects.create(
+            #         contact=user,
+            #         mosque=mosque,
+            #         payment="خیر",
+            #     )
+            #     mosque.velocity = mosque.velocity - 1
+            #     mosque.save()
+            #     return HttpResponseRedirect(mosque.link)
+            # if mosque.price == 0:
+            #     Mregistereatekaf.objects.create(
+            #         contact=user,
+            #         mosque=mosque,
+            #         payment="بله",
+            #     )
+            #     mosque.velocity = mosque.velocity - 1
+            #     mosque.save()
+            #     selectregister = Mregistereatekaf.objects.get(Q(contact=user) and Q(mosque=mosque))
+            #     messages.success(request, "با موفقیت انجام شد")
+            #     return redirect("successPay", id=selectregister.id)
+            # try:
+            #     selectuser = Mregistereatekaf.objects.get(contact__melicode=user.melicode)
+            #     url = reverse('gotogetway', kwargs={'melicode': selectuser.melicode, 'mosque':mosque.id})
+            #     return HttpResponseRedirect(url)
+            # except:
+            #     Mregistereatekaf.objects.create(
+            #         contact=user,
+            #         mosque=mosque,
+            #         payment="خیر",
+            #     )
+            #     url = reverse('gotogetway', kwargs={'melicode': user.melicode, 'mosque': mosque.id})
+            return HttpResponseRedirect(url)
     context = {
         'form':form
     }
     return render(request, "signup.html", context)
 
 
-def go_to_gateway_view(request,id,mosque):
-    selectRegister = Mregistereatekaf.objects.get(Q(contact_id=id) and Q(mosque_id=mosque))
+def go_to_gateway_view(request,melicode,mosque):
+    selectRegister = Mregistereatekaf.objects.get(Q(contact__melicode=melicode))
     # خواندن مبلغ از هر جایی که مد نظر است
     amount = selectRegister.mosque.price
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
@@ -84,7 +120,7 @@ def go_to_gateway_view(request,id,mosque):
         bank.set_request(request)
         bank.set_amount(amount)
         # یو آر ال بازگشت به نرم افزار برای ادامه فرآیند
-        bank.set_client_callback_url(reverse('callback-gateway', kwargs={'id': selectRegister.id}))
+        bank.set_client_callback_url(reverse('callback-gateway', kwargs={'id': selectRegister.contact.melicode}))
         bank.set_mobile_number(user_mobile_number)  # اختیاری
 
         # در صورت تمایل اتصال این رکورد به رکورد فاکتور یا هر چیزی که بعدا بتوانید ارتباط بین محصول یا خدمات را با این
@@ -103,7 +139,7 @@ def go_to_gateway_view(request,id,mosque):
 
 
 def callback_gateway_view(request, id):
-    selectregister = Mregistereatekaf.objects.get(id=id)
+    selectregister = Mregistereatekaf.objects.get(contact__melicode=id)
     tracking_code = request.GET.get(settings.TRACKING_CODE_QUERY_PARAM, None)
     if not tracking_code:
         logging.debug("این لینک معتبر نیست.")

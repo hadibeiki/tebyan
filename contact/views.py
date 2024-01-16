@@ -6,11 +6,12 @@ from django.core.exceptions import SuspiciousOperation
 import requests
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
 
+from ability.forms import abilityForm
 from contact.forms import registerForm
 from contact.models import Mcontact
 from mosque.forms import mosqueForm
@@ -34,7 +35,7 @@ def viewindex(request):
                     user.otp = otp
                     user.otpcreatedtime = now
                     user.save()
-                    # rest_test_send_sms(request.POST['mobile'], otp)
+                    rest_test_send_sms(request.POST['mobile'], otp)
                     request.session['user-melicode'] = request.POST['melicode']
                     return HttpResponseRedirect(reverse('verify'))
             except:
@@ -55,9 +56,9 @@ def viewindex(request):
                         marital=1,
                         otp=otp,
                         otpcreatedtime=now,
-                        testimonial="",
+                        testimonial=False,
                     )
-                    # rest_test_send_sms(request.POST['mobile'], otp)
+                    rest_test_send_sms(request.POST['mobile'], otp)
                     request.session['user-melicode'] = request.POST['melicode']
                     return HttpResponseRedirect(reverse('verify'))
                 except:
@@ -123,8 +124,16 @@ def viewaddcontact(request,melicode):
     mosques = Mmosque.objects.filter(city=1)
 
     form = registerForm(instance=selectcontact)
+    abilityform = abilityForm()
     context = {
         'form': form,
-        'mosques':mosques
+        'mosques':mosques,
+        'abilityForm': abilityform,
     }
     return render(request, "signup.html", context)
+
+
+def deletecontact(request,melicode):
+    Mregistereatekaf.objects.get(contact__melicode=melicode).delete()
+    messages.success(request, "کاربر حذف شد")
+    return redirect('alldata',id=request.user.id)

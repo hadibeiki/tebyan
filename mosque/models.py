@@ -13,8 +13,11 @@ class Mmosque(models.Model):
     startage = models.IntegerField(verbose_name="سن شروع")
     endage = models.IntegerField(verbose_name="سن پایان")
     phone = models.CharField(max_length=11, verbose_name="شماره تماس")
+    mastercard = models.CharField(max_length=16, verbose_name="شماره کارت")
+    backup = models.CharField(max_length=200, verbose_name="اسم دارنده حساب")
     city = models.ForeignKey("city.Mcity", verbose_name="شهرستان",on_delete=models.DO_NOTHING,null=True)
     description = models.TextField(verbose_name="توضیحات")
+    link = models.CharField(verbose_name="لینک اتصال", max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.name

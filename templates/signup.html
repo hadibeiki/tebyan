@@ -12,6 +12,11 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "main.css" %}">
+    <style>
+        #id_sex option[value="3"]{
+            display:none;
+        }
+    </style>
 
 </head>
 <body>
@@ -46,20 +51,73 @@
             {% include "selectmosque.html" %}
             {% include 'mosquedescription.html' %}
         </div>
+        <h3 class="title">توانایی های شما</h3>
+        <div class="testimonial" id="testimonial">
+            <p>عکاسی</p>
+            {{ abilityForm.photo }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>تدوین گر</p>
+            {{ abilityForm.editor }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>فیلم بردار</p>
+            {{ abilityForm.camera }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>تولید خبر</p>
+            {{ abilityForm.news }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>نویسندگی</p>
+            {{ abilityForm.writer }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>مدیریت کانال مجازی</p>
+            {{ abilityForm.adminis }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>شاعر</p>
+            {{ abilityForm.poemer }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>مداح و روضه خوانی</p>
+            {{ abilityForm.madah }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>مبلغ</p>
+            {{ abilityForm.adv }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>پشتیبانی</p>
+            {{ abilityForm.backup }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>فنی و مهندسی</p>
+            {{ abilityForm.engine }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>مدرس</p>
+            {{ abilityForm.teach }}
+        </div>
+        <div class="testimonial" id="testimonial">
+            <p>کودک و نوجوان</p>
+            {{ abilityForm.child }}
+        </div>
 
         <button id="submit" class="btnsubmit" type="submit">پرداخت</button>
     </div>
 </form>
 <script type="text/javascript" language="JavaScript">
-function checkCheckBoxes(myform) {
-	if (myform.testimonial.checked === false)
-	{
-		alert ('لطفا با قوانین اعتکاف موافقت کنید.باتشکر');
-		return false;
-	} else {
-		return true;
-	}
-}
+    function checkCheckBoxes(myform) {
+        if (myform.testimonial.checked === false)
+        {
+            alert ('لطفا با قوانین اعتکاف موافقت کنید.باتشکر');
+            return false;
+        } else {
+            return true;
+        }
+    }
 </script>
 <script>
     var swiper = new Swiper('.swiper-container', {

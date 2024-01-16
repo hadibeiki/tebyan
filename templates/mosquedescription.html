@@ -1,13 +1,20 @@
 <div id="mosquedata">
-    <p class="explain" >شما از {{ mosque.city.name }} مساجد {{ mosque.sex.name }} را انتخاب کرده اید.ظرفیت باقیمانده مسجد {{ mosque.velocity }} نفر است.قیمت برای معتکف در این مسجد {{ mosque.price }} تومان است</p>
-    <p class="explain2" >شما از {{ mosque.city.name }} مساجد {{ mosque.sex.name }}<br> را انتخاب کرده اید.ظرفیت باقیمانده مسجد {{ mosque.velocity }} نفر است.قیمت برای معتکف در این مسجد {{ mosque.price }} تومان است</p>
+    <p class="explain" >شما از {{ mosque.city.name }} مساجد {{ mosque.sex.name }} را انتخاب کرده اید.ظرفیت باقیمانده مسجد {{ mosque.velocity }} نفر است.قیمت برای معتکف در این مسجد {{ mosque.price }} ریال است</p>
+    <p class="explain" >لطفا مبلغ تعیین شده را به حساب شماره کارت {{ mosque.mastercard }} به نام آقای {{ mosque.backup }} واریز نمایید و عکس فیش واریزی را به شماره موبایل {{ mosque.phone }} ارسال نمایید در غیر اینصورت ثبت نام شما لغو خواهد شد</p>
+    <p class="explain2" >شما از {{ mosque.city.name }} مساجد {{ mosque.sex.name }}<br> را انتخاب کرده اید.ظرفیت باقیمانده مسجد {{ mosque.velocity }} نفر است.قیمت برای معتکف در این مسجد {{ mosque.price }} ریال است</p>
+    <p class="explain2" >لطفا مبلغ تعیین شده را به شماره کارت <br>
+    {{ mosque.mastercard }}<br>
+    به نام آقای {{ mosque.backup }} واریز نمایید<br>
+    و عکس فیش واریزی را به شماره موبایل<br>
+    {{ mosque.phone }} ارسال نمایید<br>
+    در غیر اینصورت ثبت نام شما لغو خواهد شد.</p>
 
     <hr width="80%" color="white">
     <h3 class="title" >برنامه ها و موقعیت مسجد</h3>
     <h4 class="phone">{{ mosque.phone }}  شماره پشتیبانی </h4>
     <h4 class="title">{{ mosque.address }}</h4>
     <div class="squart">
-        <div style="width: 50%; height: 20vh"> {{ map | safe }}</div>
+        <div class="mymap"> {{ map | safe }}</div>
         <textarea disabled class="programe">{{ mosque.description|safe }}</textarea>
     </div>
     <div class="swiper-container">
