@@ -25,14 +25,16 @@
 <div style="height: 70vh" class="squar">
     <form name="myForm" onsubmit="return validateForm()" action="{% url "EatekafIndex" %}" method="post">
         {% csrf_token %}
-        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا هزینه اعتکاف مسجد را در صفحه ورود اطلاعات چک کنید و از رفتن به صفحه پرداخت و بستن آن بدون پرداخت جلوگیری کنید</h5>
-{#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">سایت به علت مشکل فنی بسته است بزودی دوباره فعال می شود</h5>#}
+{#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا هزینه اعتکاف مسجد را در صفحه ورود اطلاعات چک کنید و از رفتن به صفحه پرداخت و بستن آن بدون پرداخت جلوگیری کنید</h5>#}
+        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">سایت ساعت 12 امروز فعال می شود</h5>
+        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">در حال بارگزاری شماره کارت های مساجد</h5>
+        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا مساجد ثبت نامی با پشتیبانی سایت تماس بگیرند</h5>
         <p class="headerTxt">لطفا شماره موبایل و کدملی خود را وارد کنید:</p>
         <label style="float: right" class="title">شماره موبایل</label>
-        <input type="text" name="mobile" class="mobile">
+        <input style="display: none" type="text" name="mobile" class="mobile">
         <label style="float: right; margin-top: 2%;" class="title">کد ملی/ کد شناسایی/ کد اطباع</label>
         <div style="display: flex; flex-direction: row; width: 90%">
-            <input style=" width: 100%;" type="text" name="melicode" class="melicode">
+            <input style=" width: 100%;display: none" type="text" name="melicode" class="melicode">
             <button class="btnok" type="submit">تایید</button>
         </div>
     </form>
