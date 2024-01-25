@@ -31,8 +31,10 @@ def admin3View(request, ):
             return redirect('alldatamosque', id=user.id)
         else:
             messages.info(request, "نام کاربری یا رمز عبور اشتباه است")
-            return redirect('admin2')
-    return render(request, "login2.html", )
+            return redirect('admin3')
+
+
+    return render(request, "login2.html",)
 
 
 def Vindex(request, ):
@@ -40,4 +42,8 @@ def Vindex(request, ):
 
 
 def Eatekafindex(request, ):
-    return render(request, "Eatekafindex.html", )
+    mosques = Mmosque.objects.all()
+    context = {
+        'mosques': mosques
+    }
+    return render(request, "Eatekafindex.html", context)

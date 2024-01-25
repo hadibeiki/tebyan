@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
     <title>ارسال کد تایید</title>
     <link rel="stylesheet" href="{% static "main.css" %}">
     <!-- SweetAlert2 -->
@@ -14,11 +14,11 @@
 </head>
 <body>
 <div class="background"></div>
-<div class="squar">
-    <p class="headerTxt">کد ارسال شده به موبایل خود را وارد کنید:</p>
+<div class="squarverify">
+    <p class="headerTxt">کد ارسال شده به گوشی همراه خود را وارد کنید:</p>
     <form action="{% url "verify" %}" method="post">
         {% csrf_token %}
-        <input name="otp" class="verify">
+        <input type="number" name="otp" class="verify">
         <button class="btnok" type="submit">تایید</button>
     </form>
 </div>

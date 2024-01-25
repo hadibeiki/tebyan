@@ -16,6 +16,9 @@
         #id_sex option[value="3"]{
             display:none;
         }
+        #id_sex option[value="4"]{
+            display:none;
+        }
     </style>
 
 </head>
@@ -25,6 +28,12 @@
 <form name="myform" method="post" action="{% url "signupurl" %}" enctype='multipart/form-data' onsubmit="return checkCheckBoxes(this);">
     {% csrf_token %}
     <div class="squarsign">
+        <h3 class="hoshdar">مساجد بر اساس شهرستان، جنسیت و سن فرد به معتکفین نشان داده می شوند. دقت کنید فیلتر ها را حتما درست انتخاب کنید</h3>
+        <h3 class="hoshdar">و حتما یکبار منوهای شهرستان، جنسیت و سن را انتخاب کنید</h3>
+        <h3 class="hoshdar">در صورت اشتباه از ورود فرد به مسجد جلوگیری می شود</h3>
+        <h3 class="hoshdar"> اتباع از قسمت شهرستان سازمان مهاجرین را انتخاب کنند یا با هماهنگی والی مسجد ثبت نام کنند</h3>
+        <h3 style="font-size: 24px;" class="hoshdar"> کلید ثبت را حتما بزنید و کارت خود را دریافت کنید </h3>
+
         <h3 class="title">مشخصات فردی</h3>
         <div class="radif" >
             {{ form.melicode| as_crispy_field }}
@@ -105,7 +114,7 @@
             {{ abilityForm.child }}
         </div>
 
-        <button id="submit" class="btnsubmit" type="submit">پرداخت</button>
+        <button id="submit" class="btnsubmit" type="submit">ثبت</button>
     </div>
 </form>
 <script type="text/javascript" language="JavaScript">

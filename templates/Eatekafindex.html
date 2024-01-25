@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>سامانه اعتکاف</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static "plugins/fontawesome-free/css/all.min.css" %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static "dist/css/adminlte.min.css" %}">
+    <link rel="stylesheet" href="{% static "main.css" %}">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{% static "plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" %}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{% static "plugins/toastr/toastr.min.css" %}">
-    <link rel="stylesheet" href="{% static "main.css" %}">
 </head>
 <body>
 <div class="background">
@@ -17,27 +21,96 @@
 <div class="logo">
     <img src="{% static "img/logo.png" %}">
     <div class="position">
-        <h3>سامانه جامع اعتکاف مساجد</h3>
-        <h3 style="margin-top: 1%">اداره کل تبلیغات اسلامی استان یزد</h3>
+        <h3 style="font-weight: bold; margin-top: 1%">امام صادق علیه السّلام فرمودند</h3>
+        <h3 style="margin-top: 1%">بر خردمند لازم است (در زندگی) چند برنامه داشته باشد: 1- برنامه ای برای مناجات با خدا 2- برنامه ای برای محاسبه نفس 3- برنامه ای برای تفکر در آفریده های خدا 4- و برنامه ای برای تفریح و بهره مندی از امور حلال. </h3>
     </div>
 </div>
 <p class="poem">تمام حقوق اين وب ‌سايت برای اداره کل تبلیغات اسلامی استان یزد است</p>
-<div style="height: 70vh" class="squar">
-    <form name="myForm" onsubmit="return validateForm()" action="{% url "EatekafIndex" %}" method="post">
+<div style="height: 50vh" class="squar">
+    <div class="infobtn">
+        <a href="{% url "admin3" %}">
+            <button >ادمین مساجد</button>
+        </a>
+
+        <button style="background-color: green" data-toggle="modal" data-target="#modal-lg" >مساجد</button>
+        <a href="">
+            <button >احکام اعتکاف</button>
+        </a>
+    </div>
+    <form name="myForm" onsubmit="return validateForm()" action="{% url "EatekafIndex" %}" method="post" >
         {% csrf_token %}
-{#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا هزینه اعتکاف مسجد را در صفحه ورود اطلاعات چک کنید و از رفتن به صفحه پرداخت و بستن آن بدون پرداخت جلوگیری کنید</h5>#}
-        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">سایت ساعت 12 امروز فعال می شود</h5>
-        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">در حال بارگزاری شماره کارت های مساجد</h5>
-        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا مساجد ثبت نامی با پشتیبانی سایت تماس بگیرند</h5>
-        <p class="headerTxt">لطفا شماره موبایل و کدملی خود را وارد کنید:</p>
-        <label style="float: right" class="title">شماره موبایل</label>
-        <input style="display: none" type="text" name="mobile" class="mobile">
-        <label style="float: right; margin-top: 2%;" class="title">کد ملی/ کد شناسایی/ کد اطباع</label>
+
+
+        {#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا هزینه اعتکاف مسجد را در صفحه ورود اطلاعات چک کنید و از رفتن به صفحه پرداخت و بستن آن بدون پرداخت جلوگیری کنید</h5>#}
+        {#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">سایت ساعت 12 امروز فعال می شود</h5>#}
+        {#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">در حال بارگزاری شماره کارت های مساجد</h5>#}
+        {#        <h5 style="color: red;text-align: center;font-size: 20px" class="dangerpoem">لطفا مساجد ثبت نامی با پشتیبانی سایت تماس بگیرند</h5>#}
+        <p style="color: red;text-align: center;margin-top: 2%" class="headerTxt">اعداد را در حالت انگلیسی وارد کنید</p>
+        <p style="float: right;" class="headerTxt">لطفا شماره همراه و کدملی خود را وارد کنید:</p>
+        <label style="float: right;text-align: right; margin-left: 5%;" class="title">شماره همراه</label>
+        <input placeholder="لطفا انگلیسی وارد کنید" type="number" name="mobile" class="mobile">
+        <label style="float: right; margin-top: 2%;" class="title">کد ملی/ کد شناسایی/ کد اتباع</label>
         <div style="display: flex; flex-direction: row; width: 90%">
-            <input style=" width: 100%;display: none" type="text" name="melicode" class="melicode">
+            <input placeholder="لطفا انگلیسی وارد کنید" style=" width: 100%;" type="number" name="melicode" class="melicode">
             <button class="btnok" type="submit">تایید</button>
         </div>
     </form>
+</div>
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ظرفیت خالی مساجد</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0" style="height: 300px;">
+                                <table style="direction: rtl" class="table table-head-fixed text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>جنسیت</th>
+                                        <th>سن پایان</th>
+                                        <th>سن شروع</th>
+                                        <th>ظرفیت خالی</th>
+                                        <th>شهرستان</th>
+                                        <th>آدرس</th>
+                                        <th>نام مسجد</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in mosques %}
+                                        <tr>
+                                            <td>{{ item.sex }}</td>
+                                            <td>{{ item.endage }}</td>
+                                            <td>{{ item.startage }}</td>
+                                            <td>{{ item.velocity }}</td>
+                                            <td>{{ item.city.name }}</td>
+                                            <td>{{ item.address }}</td>
+                                            <td>{{ item.name }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button data-dismiss="modal" type="button" class="btn btn-primary">بستن</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <script>
     function validateForm() {

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r_$2$$^l$3_&%w7jj8u_a3b-850&-+00+nikbx(7&*z#pn&^tc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 AUTH_USER_MODEL = 'user.Muser'
-ALLOWED_HOSTS = ['tebyanyazd.ir','www.tebyanyazd.ir','127.0.0.1']
+ALLOWED_HOSTS = ['tebyanyazd.ir','www.tebyanyazd.ir','127.0.0.1','0.0.0.0:8000','192.168.1.198','192.168.1.193']
 
 
 # Application definition
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'registerEatekaf.apps.RegisterEatekafConfig',
     'ability.apps.AbilityConfig',
+    'mosqueopinion.apps.MosqueopinionConfig',
 
 ]
 

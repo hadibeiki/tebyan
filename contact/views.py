@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from random import randint
 from urllib.request import urlopen
-from django.db.models import Q
+from django.db.models import Q, Case, When
 from django.core.exceptions import SuspiciousOperation
 import requests
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse
+from persiantools import digits
 
 from ability.forms import abilityForm
 from contact.forms import registerForm
@@ -20,10 +21,14 @@ from registerEatekaf.models import Mregistereatekaf
 
 
 def viewindex(request):
+    mosques = Mmosque.objects.all().order_by(Case(When(id=91, then=0), default=1))
+    context = {
+        'mosques': mosques
+    }
     if request.method == 'POST':
         if "mobile" in request.POST:
             try:
-                melicode = request.POST['melicode']
+                melicode = digits.fa_to_en(request.POST['melicode'])
                 user = Mcontact.objects.get(melicode=melicode)
                 try:
                     eatekafesh = Mregistereatekaf.objects.get(contact=user)
@@ -46,9 +51,9 @@ def viewindex(request):
                         name=" ",
                         family=" ",
                         dad=" ",
-                        mobile=request.POST['mobile'],
-                        melicode=request.POST['melicode'],
-                        sex_id=1,
+                        mobile=digits.fa_to_en(request.POST['mobile']),
+                        melicode=digits.fa_to_en(request.POST['melicode']),
+                        sex_id=3,
                         age=0,
                         price=0,
                         city_id=1,
@@ -64,7 +69,7 @@ def viewindex(request):
                 except:
                     messages.error(request, "لطفا دوباره امتحان کنید")
                     return HttpResponseRedirect(reverse('EatekafIndex'))
-    return render(request, "Eatekafindex.html")
+    return render(request, "Eatekafindex.html", context)
 
 
 def rendomotp():
@@ -90,7 +95,7 @@ def rest_test_send_sms(mobile, otp):
 
 def Vverify(request):
     try:
-        melicode = request.session.get('user-melicode')
+        melicode = digits.fa_to_en(request.session.get('user-melicode'))
         user = Mcontact.objects.get(melicode=melicode)
         if request.method == "POST":
             if not checkOtpExp(user.mobile, user.melicode):
@@ -121,13 +126,13 @@ def checkOtpExp(mobile,melicode):
 
 def viewaddcontact(request,melicode):
     selectcontact = Mcontact.objects.get(melicode=melicode)
-    mosques = Mmosque.objects.filter(city=1)
+    # mosques = Mmosque.objects.filter(city=1)
 
     form = registerForm(instance=selectcontact)
     abilityform = abilityForm()
     context = {
         'form': form,
-        'mosques':mosques,
+        # 'mosques':mosques,
         'abilityForm': abilityform,
     }
     return render(request, "signup.html", context)

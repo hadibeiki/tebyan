@@ -1,4 +1,9 @@
 from django.contrib import admin
 from user.models import Muser
 # Register your models here.
-admin.site.register(Muser)
+
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('id','username','mosque','city',)
+
+
+admin.site.register(Muser,BookAdmin)

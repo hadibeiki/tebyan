@@ -13,6 +13,7 @@ from azbankgateways import bankfactories, models as bank_models, default_setting
 from django.urls import reverse
 
 from ability.forms import abilityForm
+from ability.models import Mability
 from contact.forms import registerForm
 from contact.models import Mcontact
 from gallery.forms import galleryForm
@@ -55,29 +56,34 @@ def signupview(request):
         update_request = request.POST.copy()
         update_request.update({'contact': str(user.id)})
         abilityform = abilityForm(update_request or None)
-        if abilityform.is_valid():
-            abilityform.save()
-        if form.is_valid():
-            form.save()
-            Mregistereatekaf.objects.create(
-                contact=user,
-                mosque=mosque,
-                payment="خیر",
-            )
-            mosque.velocity = mosque.velocity - 1
-            mosque.save()
-            selectregister = Mregistereatekaf.objects.get(Q(contact=user) and Q(mosque=mosque))
-            messages.success(request, "با موفقیت انجام شد")
-            return redirect("successPay", id=selectregister.id)
-            # if mosque.link != "0":
-            #     Mregistereatekaf.objects.create(
-            #         contact=user,
-            #         mosque=mosque,
-            #         payment="خیر",
-            #     )
-            #     mosque.velocity = mosque.velocity - 1
-            #     mosque.save()
-            #     return HttpResponseRedirect(mosque.link)
+        try:
+            contact = Mability.objects.get(contact__melicode=user.melicode)
+            pass
+        except:
+            if abilityform.is_valid():
+                abilityform.save()
+        try:
+            selectRegister = Mregistereatekaf.objects.get(contact__melicode=user.melicode)
+            messages.error(request, "شما قبلا ثبت نام کرده اید و نمی توانید مسجد خود را تغییر دهید")
+            return redirect("successPay", id=selectRegister.contact.melicode)
+        except:
+            if form.is_valid():
+                form.save()
+                try:
+                    Mregistereatekaf.objects.create(
+                        contact=user,
+                        mosque=mosque,
+                        payment="خیر",
+                    )
+                    mosque.velocity = mosque.velocity - 1
+                    mosque.save()
+                    selectregister = Mregistereatekaf.objects.get(contact__melicode=user.melicode)
+                    messages.success(request, "با موفقیت انجام شد")
+                    return redirect("successPay", id=selectregister.contact.melicode)
+                except:
+                    messages.success(request, "لطفا دوباره امتحان کنید")
+                    return redirect("urladdcontact", melicode=selectregister.contact.melicode)
+
             # if mosque.price == 0:
             #     Mregistereatekaf.objects.create(
             #         contact=user,
@@ -205,7 +211,7 @@ def reportview(request, id):
 
 
 def successView(request, id):
-    selectEatekaf = Mregistereatekaf.objects.get(id=id)
+    selectEatekaf = Mregistereatekaf.objects.get(contact__melicode=id)
     contact ={
         "user":selectEatekaf
     }

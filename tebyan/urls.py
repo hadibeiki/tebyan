@@ -34,6 +34,7 @@ urlpatterns = [
     path("", include('registerEatekaf.urls')),
     path("", include('gallery.urls')),
     path("", include('contact.urls')),
+    path("", include('mosqueopinion.urls')),
     path('bankgateways/', az_bank_gateways_urls()),
 ]
 if settings.DEBUG:
